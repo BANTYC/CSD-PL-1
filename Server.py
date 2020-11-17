@@ -69,20 +69,27 @@ def simple_app(environ, start_response):
 
                 result = ''
 
-                if (params['start']['tz'] is not None) & (params['end']['tz'] is not None):
+                if ("tz" in params['start']) & ("tz" in params['end']):
                     start_tz = pytz.timezone(params['start']['tz'])
                     end_tz = pytz.timezone(params['end']['tz'])
                     start = start_tz.localize(start)
                     end = end_tz.localize(end_tz)
                     result = abs(end - start)
-                elif params['start']['tz'] is not None:
+
+                elif "tz" in params['start']:
                     start_tz = pytz.timezone(params['start']['tz'])
+                    end_tz = pytz.timezone('GMT')
                     start = start_tz.localize(start)
+                    end = end_tz.localize(end)
                     result = abs(end - start)
-                elif params['end']['tz'] is not None:
+
+                elif "tz" in params['end']:
+                    start_tz = pytz.timezone('GMT')
                     end_tz = pytz.timezone(params['end']['tz'])
-                    end = end_tz.localize(end_tz)
+                    start = start_tz.localize(start)
+                    end = end_tz.localize(end)
                     result = abs(end - start)
+
                 else:
                     result = abs(end - start)
 
