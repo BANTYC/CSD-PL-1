@@ -76,14 +76,14 @@ def simple_app(environ, start_response):
                     end = end_tz.localize(end)
                     result = abs(end - start)
 
-                elif "tz" in params['start']:
+                elif ("tz" in params['start']) & ("tz" not in params['end']):
                     start_tz = pytz.timezone(params['start']['tz'])
                     end_tz = pytz.timezone('GMT')
                     start = start_tz.localize(start)
                     end = end_tz.localize(end)
                     result = abs(end - start)
 
-                elif "tz" in params['end']:
+                elif ("tz" in params['end']) & ("tz" not in params['start']):
                     start_tz = pytz.timezone('GMT')
                     end_tz = pytz.timezone(params['end']['tz'])
                     start = start_tz.localize(start)
