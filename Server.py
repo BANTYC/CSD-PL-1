@@ -73,7 +73,7 @@ def simple_app(environ, start_response):
                     start_tz = pytz.timezone(params['start']['tz'])
                     end_tz = pytz.timezone(params['end']['tz'])
                     start = start_tz.localize(start)
-                    end = end_tz.localize(end_tz)
+                    end = end_tz.localize(end)
                     result = abs(end - start)
 
                 elif "tz" in params['start']:
